@@ -24,6 +24,7 @@ export class LoginComponent {
 
       if (response.data?.login?.token) {
         localStorage.setItem('token', response.data.login.token);
+        localStorage.removeItem('employees');
         this.router.navigate(['/employees']);
       } else {
         alert('Incorrect email or password');

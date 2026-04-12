@@ -22,12 +22,22 @@ export class AddEmployeeComponent {
     department: '',
   };
 
+  selectedFile: File | null = null;
+  previewUrl: string | null = null;
   errors: any = {};
 
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
   ) {}
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+
+    if (this.selectedFile) {
+      this.previewUrl = URL.createObjectURL(this.selectedFile);
+    }
+  }
 
   addEmployee() {
     this.errors = {};
@@ -74,7 +84,7 @@ export class AddEmployeeComponent {
       return;
     }
 
-    this.employeeService.addEmployee(this.employee).then((response) => {
+    this.employeeService.addEmployee(this.employee, this.selectedFile).then((response) => {
       if (response.data?.addEmployee) {
         const cached = localStorage.getItem('employees');
 

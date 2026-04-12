@@ -36,12 +36,16 @@ export class EmployeesComponent implements OnInit {
 
     if (cached) {
       this.employees = JSON.parse(cached);
+      this.cdr.detectChanges();
     }
 
     this.employeeService.getEmployees().then((response) => {
       if (response.data?.employees) {
-        this.employees = response.data.employees;
+        this.employees = [...response.data.employees];
+
         localStorage.setItem('employees', JSON.stringify(this.employees));
+
+        this.cdr.detectChanges();
       }
     });
   }

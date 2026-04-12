@@ -21,10 +21,12 @@ export class EmployeeService {
               first_name
               last_name
               email
+              gender
               designation
               department
               salary
               date_of_joining
+              employee_photo
             }
           }
         `,
@@ -32,40 +34,56 @@ export class EmployeeService {
     }).then((res) => res.json());
   }
 
-  async addEmployee(employee: any) {
+  async addEmployee(employee: any, file: File | null) {
     const token = localStorage.getItem('token');
+    const formData = new FormData();
+
+    const operations = JSON.stringify({
+      query: `
+        mutation($input: EmployeeInput!, $file: Upload) {
+          addEmployee(input: $input, file: $file) {
+            id
+            first_name
+            last_name
+            email
+            gender
+            designation
+            department
+            salary
+            date_of_joining
+            employee_photo
+          }
+        }
+      `,
+      variables: {
+        input: {
+          first_name: employee.first_name,
+          last_name: employee.last_name,
+          email: employee.email,
+          gender: employee.gender,
+          designation: employee.designation,
+          salary: employee.salary,
+          date_of_joining: employee.date_of_joining,
+          department: employee.department,
+          employee_photo: null,
+        },
+        file: null,
+      },
+    });
+
+    formData.append('operations', operations);
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+
+    if (file) {
+      formData.append('0', file);
+    }
 
     return fetch('http://localhost:5000/graphql', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
       },
-      body: JSON.stringify({
-        query: `
-          mutation {
-            addEmployee(input: {
-              first_name: "${employee.first_name}",
-              last_name: "${employee.last_name}",
-              email: "${employee.email}",
-              gender: "${employee.gender}",
-              designation: "${employee.designation}",
-              salary: ${employee.salary},
-              date_of_joining: "${employee.date_of_joining}",
-              department: "${employee.department}"
-            }) {
-              id
-              first_name
-              last_name
-              email
-              designation
-              department
-              salary
-              date_of_joining
-            }
-          }
-        `,
-      }),
+      body: formData,
     }).then((res) => res.json());
   }
 
@@ -109,6 +127,7 @@ export class EmployeeService {
               department
               salary
               date_of_joining
+              employee_photo
             }
           }
         `,
@@ -137,6 +156,7 @@ export class EmployeeService {
               department
               salary
               date_of_joining
+              employee_photo
             }
           }
         `,
@@ -144,35 +164,94 @@ export class EmployeeService {
     }).then((res) => res.json());
   }
 
-  async updateEmployee(id: string, employee: any) {
+  async updateEmployee(id: string, employee: any, file: File | null) {
     const token = localStorage.getItem('token');
+
+    if (!file) {
+      return fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify({
+          query: `
+            mutation {
+              updateEmployee(
+                id: "${id}",
+                input: {
+                  first_name: "${employee.first_name}",
+                  last_name: "${employee.last_name}",
+                  email: "${employee.email}",
+                  gender: "${employee.gender}",
+                  designation: "${employee.designation}",
+                  department: "${employee.department}",
+                  salary: ${employee.salary},
+                  date_of_joining: "${employee.date_of_joining}"
+                }
+              ) {
+                id
+                first_name
+                last_name
+                email
+                gender
+                designation
+                department
+                salary
+                date_of_joining
+                employee_photo
+              }
+            }
+          `,
+        }),
+      }).then((res) => res.json());
+    }
+
+    const formData = new FormData();
+
+    const operations = JSON.stringify({
+      query: `
+        mutation($id: ID!, $input: UpdateEmployeeInput!, $file: Upload) {
+          updateEmployee(id: $id, input: $input, file: $file) {
+            id
+            first_name
+            last_name
+            email
+            gender
+            designation
+            department
+            salary
+            date_of_joining
+            employee_photo
+          }
+        }
+      `,
+      variables: {
+        id,
+        input: {
+          first_name: employee.first_name,
+          last_name: employee.last_name,
+          email: employee.email,
+          gender: employee.gender,
+          designation: employee.designation,
+          department: employee.department,
+          salary: employee.salary,
+          date_of_joining: employee.date_of_joining,
+        },
+        file: null,
+      },
+    });
+
+    formData.append('operations', operations);
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('0', file);
 
     return fetch('http://localhost:5000/graphql', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: 'Bearer ' + token,
       },
-      body: JSON.stringify({
-        query: `
-          mutation {
-            updateEmployee(
-              id: "${id}",
-              input: {
-                first_name: "${employee.first_name}",
-                last_name: "${employee.last_name}",
-                email: "${employee.email}",
-                designation: "${employee.designation}",
-                department: "${employee.department}",
-                salary: ${employee.salary},
-                date_of_joining: "${employee.date_of_joining}"
-              }
-            ) {
-              id
-            }
-          }
-        `,
-      }),
+      body: formData,
     }).then((res) => res.json());
   }
 
@@ -183,7 +262,7 @@ export class EmployeeService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         query: `
@@ -198,6 +277,7 @@ export class EmployeeService {
               department
               salary
               date_of_joining
+              employee_photo
             }
           }
         `,

@@ -1,11 +1,20 @@
-<div class="container mt-5">
-  <h2>Signup</h2>
+<div class="container d-flex justify-content-center mt-5">
+  <div class="card p-4 shadow-sm" style="width: 400px">
+    <h2 class="mb-4 text-center">Signup</h2>
 
-  <input [(ngModel)]="username" class="form-control mb-2" placeholder="Username" />
+    <input [(ngModel)]="username" class="form-control mb-2" placeholder="Username" />
+    <input [(ngModel)]="email" class="form-control mb-2" placeholder="Email" />
+    <input
+      [(ngModel)]="password"
+      type="password"
+      class="form-control mb-3"
+      placeholder="Password"
+    />
 
-  <input [(ngModel)]="email" class="form-control mb-2" placeholder="Email" />
+    <button class="btn btn-success w-100 mb-3" (click)="signup()">Signup</button>
 
-  <input [(ngModel)]="password" class="form-control mb-2" type="password" placeholder="Password" />
-
-  <button class="btn btn-success" (click)="signup()">Signup</button>
+    <div class="text-center">
+      <a routerLink="/">Already have an account? Login</a>
+    </div>
+  </div>
 </div>

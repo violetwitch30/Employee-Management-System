@@ -2,16 +2,18 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../services/employee';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-employee',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './edit-employee.html',
 })
 export class EditEmployeeComponent implements OnInit {
   id = '';
-
+  selectedFile: File | null = null;
+  previewUrl: string | null = null;
   employee: any = {};
 
   constructor(
@@ -20,6 +22,14 @@ export class EditEmployeeComponent implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
   ) {}
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+
+    if (this.selectedFile) {
+      this.previewUrl = URL.createObjectURL(this.selectedFile);
+    }
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -51,19 +61,22 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   updateEmployee() {
-    this.employeeService.updateEmployee(this.id, this.employee).then(() => {
-      const cached = localStorage.getItem('employees');
+    this.employeeService
+      .updateEmployee(this.id, this.employee, this.selectedFile)
+      .then((response) => {
+        if (response.data?.updateEmployee) {
+          const updated = response.data.updateEmployee;
 
-      if (cached) {
-        let employees = JSON.parse(cached);
+          const cached = localStorage.getItem('employees');
+          let employees = cached ? JSON.parse(cached) : [];
 
-        employees = employees.map((e: any) => (e.id === this.id ? { ...e, ...this.employee } : e));
+          employees = employees.map((e: any) => (e.id === this.id ? updated : e));
 
-        localStorage.setItem('employees', JSON.stringify(employees));
-      }
+          localStorage.setItem('employees', JSON.stringify(employees));
 
-      this.router.navigate(['/employees']);
-    });
+          this.router.navigate(['/employees']);
+        }
+      });
   }
 
   cancel() {

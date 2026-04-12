@@ -28,6 +28,8 @@
   <input [(ngModel)]="employee.department" class="form-control mb-1" placeholder="Department" />
   <div class="text-danger mb-2">{{ errors.department }}</div>
 
+  <img *ngIf="previewUrl" [src]="previewUrl" width="100" class="mb-2" />
+  <input type="file" class="form-control mb-2" (change)="onFileSelected($event)" />
   <button class="btn btn-success me-2" (click)="addEmployee()">Save</button>
   <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
 </div>

@@ -1,13 +1,19 @@
-<div class="container mt-5">
-  <h2>Login</h2>
+<div class="container d-flex justify-content-center mt-5">
+  <div class="card p-4 shadow-sm" style="width: 400px">
+    <h2 class="mb-4 text-center">Login</h2>
 
-  <input [(ngModel)]="email" class="form-control mb-2" placeholder="Email" />
+    <input [(ngModel)]="email" class="form-control mb-2" placeholder="Email" />
+    <input
+      [(ngModel)]="password"
+      type="password"
+      class="form-control mb-3"
+      placeholder="Password"
+    />
 
-  <input [(ngModel)]="password" class="form-control mb-2" type="password" placeholder="Password" />
+    <button class="btn btn-primary w-100 mb-3" (click)="login()">Login</button>
 
-  <button class="btn btn-primary" (click)="login()">Login</button>
-
-  <br /><br />
-
-  <a routerLink="/signup">Create account</a>
+    <div class="text-center">
+      <a routerLink="/signup">Create account</a>
+    </div>
+  </div>
 </div>

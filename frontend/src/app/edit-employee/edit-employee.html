@@ -4,10 +4,23 @@
   <input [(ngModel)]="employee.first_name" class="form-control mb-2" />
   <input [(ngModel)]="employee.last_name" class="form-control mb-2" />
   <input [(ngModel)]="employee.email" class="form-control mb-2" />
+  <select [(ngModel)]="employee.gender" class="form-control mb-2">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
   <input [(ngModel)]="employee.designation" class="form-control mb-2" />
   <input [(ngModel)]="employee.department" class="form-control mb-2" />
   <input [(ngModel)]="employee.salary" class="form-control mb-2" type="number" />
   <input [(ngModel)]="employee.date_of_joining" class="form-control mb-2" type="date" />
+
+  <img
+    *ngIf="previewUrl || employee.employee_photo"
+    [src]="previewUrl || employee.employee_photo"
+    width="100"
+    class="mb-2"
+  />
+  <input type="file" class="form-control mb-2" (change)="onFileSelected($event)" />
 
   <button class="btn btn-primary me-2" (click)="updateEmployee()">Update</button>
   <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
