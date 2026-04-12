@@ -1,0 +1,17 @@
+<div class="container mt-4">
+  <h2>Employees</h2>
+
+  <button class="btn btn-danger mb-3" (click)="logout()">Logout</button>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>Name</th>
+      <th>Department</th>
+    </tr>
+
+    <tr *ngFor="let e of employees">
+      <td>{{ e.first_name }} {{ e.last_name }}</td>
+      <td>{{ e.department }}</td>
+    </tr>
+  </table>
+</div>

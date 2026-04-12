@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <h2>Login</h2>
+
+  <input [(ngModel)]="email" class="form-control mb-2" placeholder="Email" />
+
+  <input [(ngModel)]="password" class="form-control mb-2" type="password" placeholder="Password" />
+
+  <button class="btn btn-primary" (click)="login()">Login</button>
+
+  <br /><br />
+
+  <a routerLink="/signup">Create account</a>
+</div>
