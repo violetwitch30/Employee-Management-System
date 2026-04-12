@@ -41,7 +41,11 @@ async function startServer() {
   });
 
   await server.start();
-  server.applyMiddleware({ app, path: "/graphql" });
+  server.applyMiddleware({
+    app,
+    path: "/graphql",
+    cors: false,
+  });
 
   serverStarted = true;
 
