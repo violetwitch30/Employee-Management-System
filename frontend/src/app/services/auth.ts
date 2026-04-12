@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   login(email: string, password: string) {
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   signup(username: string, email: string, password: string) {
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

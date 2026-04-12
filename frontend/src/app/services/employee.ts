@@ -7,7 +7,7 @@ export class EmployeeService {
   async getEmployees() {
     const token = localStorage.getItem('token');
 
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ export class EmployeeService {
       formData.append('0', file);
     }
 
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -90,7 +90,7 @@ export class EmployeeService {
   async deleteEmployee(id: string) {
     const token = localStorage.getItem('token');
 
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export class EmployeeService {
   async searchEmployees(search: string) {
     const token = localStorage.getItem('token');
 
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ export class EmployeeService {
   async searchByDesignation(search: string) {
     const token = localStorage.getItem('token');
 
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ export class EmployeeService {
     const token = localStorage.getItem('token');
 
     if (!file) {
-      return fetch('http://localhost:5000/graphql', {
+      return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -246,7 +246,7 @@ export class EmployeeService {
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
     formData.append('0', file);
 
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -258,7 +258,7 @@ export class EmployeeService {
   async getEmployee(id: string) {
     const token = localStorage.getItem('token');
 
-    return fetch('http://localhost:5000/graphql', {
+    return fetch('https://101504996-comp3133-assignment2-back.vercel.app/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
