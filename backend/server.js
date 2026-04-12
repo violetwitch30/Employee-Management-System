@@ -11,7 +11,15 @@ const getUser = require("./utils/auth");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:4200",
+      "https://101504996-comp3133-assignment2-fron.vercel.app",
+    ],
+    credentials: true,
+  }),
+);
 app.use(graphqlUploadExpress());
 
 let serverStarted = false;
