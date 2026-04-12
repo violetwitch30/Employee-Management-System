@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2>Add Employee</h2>
+
+  <input [(ngModel)]="employee.first_name" class="form-control mb-1" placeholder="First Name" />
+  <div class="text-danger mb-2">{{ errors.first_name }}</div>
+  <input [(ngModel)]="employee.last_name" class="form-control mb-1" placeholder="Last Name" />
+  <div class="text-danger mb-2">{{ errors.last_name }}</div>
+  <input [(ngModel)]="employee.email" class="form-control mb-1" placeholder="Email" />
+  <div class="text-danger mb-2">{{ errors.email }}</div>
+  <select [(ngModel)]="employee.gender" class="form-control mb-1">
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <div class="text-danger mb-2">{{ errors.gender }}</div>
+  <input [(ngModel)]="employee.designation" class="form-control mb-1" placeholder="Designation" />
+  <div class="text-danger mb-2">{{ errors.designation }}</div>
+  <input
+    [(ngModel)]="employee.salary"
+    class="form-control mb-1"
+    type="number"
+    placeholder="Salary"
+  />
+  <div class="text-danger mb-2">{{ errors.salary }}</div>
+  <input [(ngModel)]="employee.date_of_joining" class="form-control mb-1" type="date" />
+  <div class="text-danger mb-2">{{ errors.date_of_joining }}</div>
+  <input [(ngModel)]="employee.department" class="form-control mb-1" placeholder="Department" />
+  <div class="text-danger mb-2">{{ errors.department }}</div>
+
+  <button class="btn btn-success me-2" (click)="addEmployee()">Save</button>
+  <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+</div>

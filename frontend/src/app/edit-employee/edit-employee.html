@@ -1,0 +1,14 @@
+<div class="container mt-4">
+  <h2>Edit Employee</h2>
+
+  <input [(ngModel)]="employee.first_name" class="form-control mb-2" />
+  <input [(ngModel)]="employee.last_name" class="form-control mb-2" />
+  <input [(ngModel)]="employee.email" class="form-control mb-2" />
+  <input [(ngModel)]="employee.designation" class="form-control mb-2" />
+  <input [(ngModel)]="employee.department" class="form-control mb-2" />
+  <input [(ngModel)]="employee.salary" class="form-control mb-2" type="number" />
+  <input [(ngModel)]="employee.date_of_joining" class="form-control mb-2" type="date" />
+
+  <button class="btn btn-primary me-2" (click)="updateEmployee()">Update</button>
+  <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+</div>

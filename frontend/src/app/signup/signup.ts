@@ -27,7 +27,7 @@ export class SignupComponent {
         alert('Signup successful');
         this.router.navigate(['/']);
       } else {
-        alert(JSON.stringify(response));
+        alert('Email already exists or invalid signup');
       }
     });
   }

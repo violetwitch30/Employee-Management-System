@@ -1,17 +1,49 @@
 <div class="container mt-4">
   <h2>Employees</h2>
 
-  <button class="btn btn-danger mb-3" (click)="logout()">Logout</button>
+  <a routerLink="/add" class="btn btn-success mb-3">Add Employee</a>
+  <button class="btn btn-danger mb-3 ms-2" (click)="logout()">Logout</button>
+
+  <input
+    [(ngModel)]="searchText"
+    class="form-control mb-2"
+    placeholder="Search department or designation"
+  />
+
+  <button class="btn btn-primary mb-3" (click)="search()">Search</button>
 
   <table class="table table-bordered">
-    <tr>
-      <th>Name</th>
-      <th>Department</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Date Joined</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-    <tr *ngFor="let e of employees">
-      <td>{{ e.first_name }} {{ e.last_name }}</td>
-      <td>{{ e.department }}</td>
-    </tr>
+    <tbody>
+      <tr *ngFor="let e of employees">
+        <td>{{ e.first_name }} {{ e.last_name }}</td>
+        <td>{{ e.email }}</td>
+        <td>{{ e.designation }}</td>
+        <td>{{ e.department }}</td>
+        <td>{{ e.salary }}</td>
+        <td>
+          {{ e.date_of_joining?.slice(8,10) }}/{{ e.date_of_joining?.slice(5,7) }}/{{
+          e.date_of_joining?.slice(0,4) }}
+        </td>
+        <td>
+          <a [routerLink]="['/details', e.id]" class="btn btn-sm btn-info me-2"> Details </a>
+
+          <a [routerLink]="['/edit', e.id]" class="btn btn-sm btn-warning me-2"> Edit </a>
+
+          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(e.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
