@@ -1,5 +1,4 @@
-# COMP3133 Assignment 2  
-## Fidan Zeynalli — 101504996
+# Employee Management System
 
 Employee Management System built with Angular frontend and Node.js + GraphQL backend.
 
